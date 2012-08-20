@@ -41,7 +41,7 @@ namespace CTrack {
     /// Helper function.
     /// Returns the number of pyramid levels required to achieve a given size
     /// under the constraint that the sizes are dividable by 2^nNumLevels.
-    unsigned int MinImageSizeToNumLevels( const int nWidth,
+    inline unsigned int MinImageSizeToNumLevels( const int nWidth,
                                           const int nHeight,
                                           const int nMinWidth, ///< Input:
                                           const int nMinHeight, ///< Input:
@@ -74,11 +74,11 @@ namespace CTrack {
         void BuildPyramid( int nNumLevels, unsigned char* pImage, 
                            int nWidth, int nHeight, int nWidthStep );
 
-        ImageHolder* GetImage() { return m_vImagePyramid.size() == 0 ? NULL : m_vImagePyramid[0]; }
-        ImageHolder* GetImage( unsigned int nLevel ) { return nLevel >= m_vImagePyramid.size() ? NULL : m_vImagePyramid[nLevel]; }
-        ImageHolder* GetSmallestImage() { return GetImage( (unsigned int)m_vImagePyramid.size()-1 ); }
+        inline ImageHolder* GetImage() { return m_vImagePyramid.size() == 0 ? NULL : m_vImagePyramid[0]; }
+        inline ImageHolder* GetImage( unsigned int nLevel ) { return nLevel >= m_vImagePyramid.size() ? NULL : m_vImagePyramid[nLevel]; }
+        inline ImageHolder* GetSmallestImage() { return GetImage( m_vImagePyramid.size()-1 ); }
 
-        unsigned int GetNumLevels() { return (unsigned int)m_vImagePyramid.size(); }
+        inline unsigned int GetNumLevels() { return m_vImagePyramid.size(); }
 
     private:
         ImagePyramid( const ImagePyramid & );
@@ -102,7 +102,7 @@ namespace CTrack {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::ImagePyramid::BuildPyramid( int nNumLevels, unsigned char* pImage, 
+inline void CTrack::ImagePyramid::BuildPyramid( int nNumLevels, unsigned char* pImage,
                                          int nWidth, int nHeight, int nWidthStep
                                          )
 {    
@@ -132,7 +132,7 @@ void CTrack::ImagePyramid::BuildPyramid( int nNumLevels, unsigned char* pImage,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::ImagePyramid::_Free()
+inline void CTrack::ImagePyramid::_Free()
 {
     // Do not free image on first pyramid level
     for( size_t ii=1; ii < m_vImagePyramid.size(); ii++ ) {
@@ -143,7 +143,7 @@ void CTrack::ImagePyramid::_Free()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool CTrack::ImagePyramid::_AllocatedWithCorrectSize( const int nWidth, 
+inline bool CTrack::ImagePyramid::_AllocatedWithCorrectSize( const int nWidth,
                                                       const int nHeight,
                                                       const int nWidthStep )
 {
@@ -156,7 +156,7 @@ bool CTrack::ImagePyramid::_AllocatedWithCorrectSize( const int nWidth,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::ImagePyramid::_Allocate( const int nNumLevels,
+inline void CTrack::ImagePyramid::_Allocate( const int nNumLevels,
                                       unsigned char* pImage, 
                                       const int nWidth,
                                       const int nHeight,

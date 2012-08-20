@@ -15,7 +15,8 @@ namespace CTrack {
                      const int nWidthStep ) :
         pImageData( pImageData ), nWidth( nWidth ), nHeight( nHeight ),
             nWidthStep( nWidthStep ) {}
-        void print( const char* sMsg ) {
+
+        inline void print( const char* sMsg ) {
             std::cout << sMsg << std::endl;
             for( int ii=0; ii<nWidth; ii++ ) {
                 for( int jj=0; jj<nHeight; jj++ ) {

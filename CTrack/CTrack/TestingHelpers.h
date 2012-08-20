@@ -33,7 +33,7 @@
 
 namespace CTrack {
     ////////////////////////////////////////////////////////////////////////////
-    CTrack::Homography GenerateTranslation( double dX, double dY ) {
+    inline CTrack::Homography GenerateTranslation( double dX, double dY ) {
         CTrack::Homography HTrans;
         HTrans.Set( 0, 2, dX );
         HTrans.Set( 1, 2, dY );
@@ -41,7 +41,7 @@ namespace CTrack {
     }
  
     ////////////////////////////////////////////////////////////////////////////
-    CTrack::Homography GenerateCenteredRotation( const int nPatchWidth, 
+    inline CTrack::Homography GenerateCenteredRotation( const int nPatchWidth, 
                                                  const int nPatchHeight, 
                                                  const double dAngleDeg ) {
         CTrack::Homography HRot;

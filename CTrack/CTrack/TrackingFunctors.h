@@ -18,7 +18,7 @@
 namespace CTrack {
     const double REG_SIGMA_ALPHA = 0.2;
     const double REG_SIGMA_BETA  = 30;
-    double REG_MULT_ERROR( const double dRMS ) { const double dSc = dRMS/10; return dSc*dSc; } 
+    inline double REG_MULT_ERROR( const double dRMS ) { const double dSc = dRMS/10; return dSc*dSc; } 
         //{ return dRMS; } //
 }
 
@@ -26,7 +26,7 @@ namespace CTrack {
 namespace CTrack {
 
     ////////////////////////////////////////////////////////////////////////////
-    void AddAffineIlluminationRegulariser
+    inline void AddAffineIlluminationRegulariser
         ( const int DOF, ///< Input: number of parameters being estimated
           const double dNumPixels, ///<Input: Number of pixels used in the minimisation
           double* JtJ, ///<Input/Output: Hessian (J'*J) in upper triangular form

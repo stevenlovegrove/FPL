@@ -63,7 +63,7 @@ namespace CTrack {
    
     ////////////////////////////////////////////////////////////////////////////
     /// Returns true if the model estimates the inter-frame blur
-    bool BlurModel( TrackingMotionModel eTrackingMotionModel ) {
+    inline bool BlurModel( TrackingMotionModel eTrackingMotionModel ) {
         return eTrackingMotionModel == HOMOGRAPHY_BLUR_MAGN;
     }
 
@@ -71,7 +71,7 @@ namespace CTrack {
     /// Adds two extra terms to the least squares:
     /// C1 * \| alphaBest - alphaPrev - 1 \|^2 
     /// C2 * \| betaBest - betaPrev \|^2
-    void AddAffineIlluminationRegulariser( const int DOF, ///< Input: number of parameters being estimated
+    inline void AddAffineIlluminationRegulariser( const int DOF, ///< Input: number of parameters being estimated
                                            const double dNumPixels, ///<Input: Number of pixels used in the minimisation
                                            double* JtJ, ///<Input/Output: Hessian (J'*J) in upper triangular form
                                            double* JtE, ///<Input/Output: J'*error
@@ -85,7 +85,7 @@ namespace CTrack {
     /// Assumes the memory has been allocated for the current buffers.
     /// Simplified call assuming the tracking without blur estimation.
     template< class TrackingFunctor, class MaskFunctorT >
-        bool SSDUpdateSL3Motion( unsigned char* pRefPatch, ///< Input: will be modified if tracking with estimation of blur
+    inline     bool SSDUpdateSL3Motion( unsigned char* pRefPatch, ///< Input: will be modified if tracking with estimation of blur
                                  float* pRefPatchGradX,///< Input:
                                  float* pRefPatchGradY,///< Input:
                                  const int nPatchWidth,              ///< Input:
@@ -113,7 +113,7 @@ namespace CTrack {
     /// Assumes the memory has been allocated for the current buffers.
     ///
     template< class TrackingFunctor, class MaskFunctorT >
-        bool SSDUpdateSL3Motion( unsigned char* pRefPatch, ///< Input: will be modified if tracking with estimation of blur
+    inline     bool SSDUpdateSL3Motion( unsigned char* pRefPatch, ///< Input: will be modified if tracking with estimation of blur
                                  float* pRefPatchGradX,///< Input:
                                  float* pRefPatchGradY,///< Input:
                                  float* pRefPatchWTGradX,///< Input: only used if estimating blur, will contain weighted blurred image in x
@@ -143,7 +143,7 @@ namespace CTrack {
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 template< class TrackingFunctor, class MaskFunctorT >
-bool CTrack::SSDUpdateSL3Motion( unsigned char* pRefPatch,
+inline bool CTrack::SSDUpdateSL3Motion( unsigned char* pRefPatch,
                                  float* pRefPatchGradX,
                                  float* pRefPatchGradY,
                                  const int nPatchWidth,
@@ -182,7 +182,7 @@ bool CTrack::SSDUpdateSL3Motion( unsigned char* pRefPatch,
 // and assume the current image is blurred and wish to blur the reference
 // view to enable accurate tracking.
 template< class MaskFunctorT >
-void ComputedBlurredReferencImageAndJacobian(  unsigned char* pRefPatch,
+inline void ComputedBlurredReferencImageAndJacobian(  unsigned char* pRefPatch,
                                                float* pRefPatchGradX,
                                                float* pRefPatchGradY,
                                                float* pRefPatchWTGradX,
@@ -258,7 +258,7 @@ void ComputedBlurredReferencImageAndJacobian(  unsigned char* pRefPatch,
 
 ////////////////////////////////////////////////////////////////////////////////
 template< class MaskFunctorT >
-void WarpNoIllumination(  const unsigned char* pCurImage,
+inline void WarpNoIllumination(  const unsigned char* pCurImage,
                           const int nImageWidth,
                           const int nImageHeight,
                           const int nImageWidthStep,
@@ -299,7 +299,7 @@ void WarpNoIllumination(  const unsigned char* pCurImage,
 
 ////////////////////////////////////////////////////////////////////////////////
 template< class MaskFunctorT >
-void WarpIllumination( const unsigned char* pCurImage,
+inline void WarpIllumination( const unsigned char* pCurImage,
                        const int nImageWidth,
                        const int nImageHeight,
                        const int nImageWidthStep,
@@ -343,7 +343,7 @@ void WarpIllumination( const unsigned char* pCurImage,
 
 ////////////////////////////////////////////////////////////////////////////////
 template< class TrackingFunctor, class MaskFunctorT >
-bool CTrack::SSDUpdateSL3Motion( unsigned char* pRefPatch,
+inline bool CTrack::SSDUpdateSL3Motion( unsigned char* pRefPatch,
                                  float* pRefPatchGradX,
                                  float* pRefPatchGradY,
                                  float* pRefPatchWTGradX,

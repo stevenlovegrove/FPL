@@ -252,7 +252,7 @@ namespace CTrack {
 
 #ifdef CTRACK_USE_SSSE3
     /////////////////////////////////////////////////////////////////////////////
-    void HalveImageSSSE3( const unsigned char *pInputData, 
+    inline void HalveImageSSSE3( const unsigned char *pInputData,
                           const int nWidth,                
                           const int nHeight,               
                           unsigned char *pOutputData       
@@ -285,7 +285,7 @@ namespace CTrack {
     }
 #else
     /////////////////////////////////////////////////////////////////////////////
-    void HalveImageSSSE3( const unsigned char *pInputData, 
+    inline void HalveImageSSSE3( const unsigned char *pInputData,
                           const int nWidth,                
                           const int nHeight,               
                           unsigned char *pOutputData       
@@ -316,7 +316,7 @@ namespace CTrack {
                    );
 
     ////////////////////////////////////////////////////////////////////////////
-    double RMS( unsigned char* pIm1, unsigned char* pIm2,
+    inline double RMS( unsigned char* pIm1, unsigned char* pIm2,
                 const int nWidth, const int nHeight, 
                 const int nWidthStep1, const int nWidthStep2 ) {
         double dRMS = 0.;
@@ -359,7 +359,7 @@ void CTrack::Warp( const IplImage* pImage,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::Warp( const IplImage* pImage, ///< Input: image input
+inline void CTrack::Warp( const IplImage* pImage, ///< Input: image input
                    const double*  pH,       ///< Input: 3x3 homography matrix in row-major
                    IplImage* pWarpedPatch  ///< Output: memory allocated by the user that will be used to store the result of the warping
                    ) {
@@ -371,7 +371,7 @@ void CTrack::Warp( const IplImage* pImage, ///< Input: image input
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::Warp( const unsigned char* pImage,  ///< Input: image input
+inline void CTrack::Warp( const unsigned char* pImage,  ///< Input: image input
                    const int nImageWidth,     ///< Input: image width
                    const int nImageHeight,    ///< Input: image height
                    const double*  pH,         ///< Input: 3x3 homography matrix in row-major
@@ -490,7 +490,7 @@ inline void BilinearInterpolationIllum( const int nWM, const int nHM,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::Warp( const unsigned char* pImage, ///< Input: image input
+inline void CTrack::Warp( const unsigned char* pImage, ///< Input: image input
                    const int nImageWidth,    ///< Input: image width
                    const int nImageHeight,   ///< Input: image height
                    const int nImageWidthStep,
@@ -509,7 +509,7 @@ void CTrack::Warp( const unsigned char* pImage, ///< Input: image input
 
 ////////////////////////////////////////////////////////////////////////////////
 template< class MaskFunctorT >
-void CTrack::Warp( const unsigned char* pImage, ///< Input: image input
+inline void CTrack::Warp( const unsigned char* pImage, ///< Input: image input
                    const int nImageWidth,    ///< Input: image width
                    const int nImageHeight,   ///< Input: image height
                    const int nImageWidthStep,
@@ -574,7 +574,7 @@ void CTrack::Warp( const unsigned char* pImage, ///< Input: image input
 
 ////////////////////////////////////////////////////////////////////////////////
 template< class MaskFunctorT >
-void CTrack::WarpIllum( const unsigned char* pImage, ///< Input: image input
+inline void CTrack::WarpIllum( const unsigned char* pImage, ///< Input: image input
                         const int nImageWidth,    ///< Input: image width
                         const int nImageHeight,   ///< Input: image height
                         const int nImageWidthStep,
@@ -639,7 +639,7 @@ void CTrack::WarpIllum( const unsigned char* pImage, ///< Input: image input
  
 ////////////////////////////////////////////////////////////////////////////////
 template< class MaskFunctorT >
-void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image input
+inline void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image input
                               const int nImageWidth,    ///< Input: image width
                               const int nImageHeight,   ///< Input: image height
                               float dfX, ///< Input: offset in X
@@ -655,7 +655,7 @@ void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image inp
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image input
+inline void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image input
                               const int nImageWidth,    ///< Input: image width
                               const int nImageHeight,   ///< Input: image height
                               float dfX, ///< Input: offset in X
@@ -672,7 +672,7 @@ void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image inp
 
 ////////////////////////////////////////////////////////////////////////////////
 template< class MaskFunctorT >
-void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image input
+inline void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image input
                               const int nImageWidth,    ///< Input: image width
                               const int nImageHeight,   ///< Input: image height
                               const int nImageWidthStep,
@@ -717,7 +717,7 @@ void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image inp
 
 ////////////////////////////////////////////////////////////////////////////////
 template< class MaskFunctorT >
-void CTrack::WarpTranslationIllum( const unsigned char* pImage, ///< Input: image input
+inline void CTrack::WarpTranslationIllum( const unsigned char* pImage, ///< Input: image input
                                    const int nImageWidth,    ///< Input: image width
                                    const int nImageHeight,   ///< Input: image height
                                    const int nImageWidthStep,
@@ -762,7 +762,7 @@ void CTrack::WarpTranslationIllum( const unsigned char* pImage, ///< Input: imag
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image input
+inline void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image input
                               const int nImageWidth,    ///< Input: image width
                               const int nImageHeight,   ///< Input: image height
                               const int nImageWidthStep,
@@ -780,7 +780,7 @@ void CTrack::WarpTranslation( const unsigned char* pImage, ///< Input: image inp
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool CTrack::HalveImage( const unsigned char *pInputData, ///< Input: input image
+inline bool CTrack::HalveImage( const unsigned char *pInputData, ///< Input: input image
                          const int nWidth,                ///< Input: image width
                          const int nHeight,               ///< Input: image height
                          unsigned char *pOutputData       ///< Ouput: decimated image
@@ -791,7 +791,7 @@ bool CTrack::HalveImage( const unsigned char *pInputData, ///< Input: input imag
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool CTrack::HalveImage( const unsigned char *pInputData, ///< Input: input image
+inline bool CTrack::HalveImage( const unsigned char *pInputData, ///< Input: input image
                          const int nWidth,                ///< Input: image width
                          const int nHeight,               ///< Input: image height
                          const int nWidthStep,            ///< Input: 
@@ -821,7 +821,7 @@ bool CTrack::HalveImage( const unsigned char *pInputData, ///< Input: input imag
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::Gradient( unsigned char* pImage, ///< Input:
+inline void CTrack::Gradient( unsigned char* pImage, ///< Input:
                        const int nImageWidth,       ///< Input:
                        const int nImageHeight,      ///< Input:     
                        float* pGradX,               ///< Output:
@@ -833,7 +833,7 @@ void CTrack::Gradient( unsigned char* pImage, ///< Input:
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void CTrack::Gradient( unsigned char* pImage,  ///< Input:
+inline void CTrack::Gradient( unsigned char* pImage,  ///< Input:
                        const int nImageWidth,  ///< Input:
                        const int nImageHeight, ///< Input:  
                        const int nImageWidthStep,

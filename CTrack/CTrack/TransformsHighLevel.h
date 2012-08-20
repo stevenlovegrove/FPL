@@ -99,8 +99,8 @@ void CTrack::WarpBlur( const unsigned char* pImage, ///< Input: image input
                        const int nPatchHeight,      ///< Input: warped patch height
                        const int nPatchWidthStep,   ///< Input: warped patch step to change row for non contiguous memory (eg OpenCV)
                        MaskFunctorT& maskFctr, ///< Output: memory allocated by the user that will contain the bytes to ignore (out-of-image) 1 <-> ok
-                       double dStep = 1, /// Input: step in pixels between samples (tradeoff between speed and accuracy)
-                       bool bJacobian = false  ///< Input: should the Jacobian be computed (instead of just the warp)
+                       double dStep, /// Input: step in pixels between samples (tradeoff between speed and accuracy)
+                       bool bJacobian  ///< Input: should the Jacobian be computed (instead of just the warp)
                        )
 {
     const int nPadding = nPatchWidthStep - nPatchWidth;

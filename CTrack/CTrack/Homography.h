@@ -127,28 +127,28 @@ namespace CTrack {
         }
 
         ////////////////////////////////////////////////////////////////////////
-        void id() {
+        inline void id() {
             m_mH = Eigen::Matrix3d::Identity();
         }
 
         ////////////////////////////////////////////////////////////////////////
-        void zero() {
+        inline void zero() {
             m_mH = Eigen::Matrix3d::Zero();
         }
         
         ////////////////////////////////////////////////////////////////////////
-        void mult( const Homography& H ) {
+        inline void mult( const Homography& H ) {
             m_mH *= H.m_mH;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        void mult( const double dScalar ) {
+        inline void mult( const double dScalar ) {
             m_mH *= dScalar;
         }
 
         ////////////////////////////////////////////////////////////////////////
         /// Axis-angle update
-        void rot( const double d1, const double d2, const double d3 ) {
+        inline void rot( const double d1, const double d2, const double d3 ) {
             Eigen::Matrix<double,3,1> vESMUpdate;
             vESMUpdate[0] = d1;
             vESMUpdate[1] = d2;
@@ -157,7 +157,7 @@ namespace CTrack {
         }
 
         ////////////////////////////////////////////////////////////////////////
-        void rot( const double dAngle ) {
+        inline void rot( const double dAngle ) {
             Eigen::Matrix<double,3,1> vESMUpdate;
             vESMUpdate[0] = 0;
             vESMUpdate[1] = 0;
@@ -167,7 +167,7 @@ namespace CTrack {
 
         ////////////////////////////////////////////////////////////////////////
         /// Replace homography H with:  H(cx/2,cy/2)*H*H(-cx/2,-cy/2)
-        void center( const double dCx, const double dCy ) {
+        inline void center( const double dCx, const double dCy ) {
             Eigen::Matrix3d mHC = Eigen::Matrix3d::Identity();
             mHC( 0, 2 ) = dCx/2;
             mHC( 1, 2 ) = dCy/2;
@@ -181,7 +181,7 @@ namespace CTrack {
         ////////////////////////////////////////////////////////////////////////
         /// Generate a random matrix
         /// WARNING: if the generators are changes, this function has to be changed
-        void rand( const double dMeanTx, const double dStdTx, ///< Input: translation in x
+        inline void rand( const double dMeanTx, const double dStdTx, ///< Input: translation in x
                    const double dMeanTy, const double dStdTy, ///< Input: translation in y
                    const double dMeanRz, const double dStdRz, ///< Input: inplane rotation (rotation around z)
                    const double dMeanS,  const double dStdS,  ///< Input: exp-scale
@@ -218,7 +218,7 @@ namespace CTrack {
         ////////////////////////////////////////////////////////////////////////
         /// Matrix will become inv(Hs)*H*Hs with Hs a scaling matrix
         /// defined by dScale.
-        CTrack::Homography scale( double dScale ) { 
+        inline CTrack::Homography scale( double dScale ) { 
             Eigen::Matrix3d MScaleDown = Eigen::Matrix3d::Identity();
             Eigen::Matrix3d MScaleUp = Eigen::Matrix3d::Identity();
             MScaleDown(0,0) = 1./dScale;
@@ -242,7 +242,7 @@ namespace CTrack {
 
         ////////////////////////////////////////////////////////////////////////
         template<class T1, class T2>
-            std::pair<T2,T2> warp( const std::pair<T1,T1>& pIn ) const {
+        inline  std::pair<T2,T2> warp( const std::pair<T1,T1>& pIn ) const {
             Eigen::Vector3d vIn( pIn.first, pIn.second, 1 );
             Eigen::Vector3d vOut = m_mH*vIn;
             return std::pair<T2,T2>( vOut(0)/vOut(2), 
@@ -251,7 +251,7 @@ namespace CTrack {
 
         ////////////////////////////////////////////////////////////////////////
         template<class T1, class T2>
-        void warp_polymult( const std::vector<std::pair<T1,T1> >& vPolyIn,
+        inline void warp_polymult( const std::vector<std::pair<T1,T1> >& vPolyIn,
                             std::vector<std::pair<T2,T2> >& vPolyOut
                             ) const {
             vPolyOut.clear();
@@ -265,7 +265,7 @@ namespace CTrack {
         }
 
         ////////////////////////////////////////////////////////////////////////
-        void warp_polymult_exp( const std::vector<std::pair<double,double> >& vPolyIn,
+        inline void warp_polymult_exp( const std::vector<std::pair<double,double> >& vPolyIn,
                                 std::vector<std::pair<double,double> >& vPolyOut
                             ) const {
             vPolyOut.clear();
@@ -279,13 +279,13 @@ namespace CTrack {
         }
       
         ////////////////////////////////////////////////////////////////////////
-        void Set( const int nX, const int nY, const double dValue ) {
+        inline void Set( const int nX, const int nY, const double dValue ) {
             m_mH( nX,  nY ) = dValue;
         }
 
         ////////////////////////////////////////////////////////////////////////
         template<class T>
-            void set( T* mH ) {
+        inline    void set( T* mH ) {
             for( size_t ii=0; ii<3; ii++ ) {
                 for( size_t jj=0; jj<3; jj++ ) {
                     m_mH( ii, jj ) = mH[ 3*ii + jj ];
@@ -312,12 +312,12 @@ namespace CTrack {
         }
 
         ////////////////////////////////////////////////////////////////////////
-        void print() const {
+        inline void print() const {
             std::cout << m_mH << std::endl;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        void print( const char * sMsg ) const {
+        inline void print( const char * sMsg ) const {
             std::cout << sMsg << std::endl << m_mH << std::endl;
         }
 

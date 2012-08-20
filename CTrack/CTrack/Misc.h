@@ -19,7 +19,7 @@ inline double TocMS( double t0 ) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void print( const char* sMsg, unsigned char* pIm, 
+inline void print( const char* sMsg, unsigned char* pIm,
             int nPatchWidth, int nPatchHeight, int nPatchWidthStep )
 {
     std::cout << sMsg << std::endl;
