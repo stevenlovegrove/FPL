@@ -124,6 +124,21 @@ inline int DOF_T( const int DOF ) { return DOF*(DOF+1)/2; }
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace CTrack {
+    
+    ////////////////////////////////////////////////////////////////////////////
+    class LineJacobianTranslationX {
+    public:
+        const static int DOF = 1;
+        void operator()( double* JTmp,
+                            const double dx, const double,
+                            const double, const double,
+                            const unsigned char,
+                            const double, const double,
+                            const double*, const double
+                        ) {
+            JTmp[0] = JK1;
+        }
+    };
 
     ////////////////////////////////////////////////////////////////////////////
     class LineJacobianTranslation {

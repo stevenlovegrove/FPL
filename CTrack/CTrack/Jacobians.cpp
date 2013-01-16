@@ -290,7 +290,8 @@ namespace CTrack {
     template void ESMJacobianBlur<T1>( unsigned char*, float*, float*, float*, float*, \
     unsigned char*, float*, float*, const int, const int, const int, const double*, \
         const double, double*, double*, double* );
-
+ 
+    INSTANTIATE_ESM_JACOBIAN( CTrack::LineJacobianTranslationX );
     INSTANTIATE_ESM_JACOBIAN( CTrack::LineJacobianTranslation );
     INSTANTIATE_ESM_JACOBIAN( CTrack::LineJacobianTranslationIllumination );
     INSTANTIATE_ESM_JACOBIAN( CTrack::LineJacobianSE2 );

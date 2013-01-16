@@ -70,6 +70,32 @@ namespace CTrack {
         // Update RMS error
         *dRMS = sqrt( dSumSqError/(dNumPixels+2) );
     } 
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    class TranslationXFunctor
+    {
+    public:
+        typedef LineJacobianTranslationX LJ;
+
+        const static TrackingMotionModel MOTION_MODEL = TRANSLATION;
+        const static TrackingIlluminationModel ILLUMINATION_MODEL = NONE;
+        const static bool BLUR = false;
+
+        static bool UpdateResult( TrackingResults* pTrackingResults,
+                                    double* JtJ, double* JtE, 
+                                    double* dNormUpdate )
+        {
+            Homography HEst = pTrackingResults->GetHomography();
+            bool bSuccess = HEst.R2Update( JtJ, JtE, dNormUpdate );
+            if( bSuccess ) { 
+                pTrackingResults->SetHomography( HEst ); 
+            }
+            return bSuccess;
+        }
+
+        static void Regularise( int, int, double*, double*, TrackingResults*, double* ) {}
+    };
+
  
     ////////////////////////////////////////////////////////////////////////////////
     class TranslationFunctor
